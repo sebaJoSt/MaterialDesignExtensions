@@ -234,6 +234,8 @@
                     VerticalAlignment="Top"
                     Orientation="Vertical">
                     <TextBlock
+                        Width="224"
+                        HorizontalAlignment="Left"
                         Style="{StaticResource fileSystemEntryInfoNameStyle}"
                         Text="{Binding Path=Name}"
                         TextTrimming="CharacterEllipsis"
@@ -349,6 +351,8 @@
                     VerticalAlignment="Top"
                     Orientation="Vertical">
                     <TextBlock
+                        Width="224"
+                        HorizontalAlignment="Left"
                         Style="{StaticResource fileSystemEntryInfoNameStyle}"
                         Text="{Binding Path=Name}"
                         TextTrimming="CharacterEllipsis"
@@ -513,7 +517,7 @@
 
     <DataTemplate x:Key="directoryInfoItemTemplate">
         <Grid
-            Height="72"
+            Height="45"
             HorizontalAlignment="Stretch"
             Background="Transparent"
             IsEnabled="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
@@ -585,8 +589,8 @@
                     </StackPanel>
                     <Button
                         Grid.Column="2"
-                        Width="12"
-                        Height="12"
+                        Width="24"
+                        Height="24"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{x:Static internalCommands:FileSystemControlCommands.ShowInfoCommand}"
@@ -622,7 +626,7 @@
 
     <DataTemplate x:Key="fileInfoItemTemplate">
         <Grid
-            Height="40"
+            Height="45"
             HorizontalAlignment="Stretch"
             Background="Transparent"
             IsEnabled="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
@@ -704,8 +708,8 @@
                     </StackPanel>
                     <Button
                         Grid.Column="2"
-                        Width="18"
-                        Height="18"
+                        Width="24"
+                        Height="24"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{x:Static internalCommands:FileSystemControlCommands.ShowInfoCommand}"
@@ -901,7 +905,7 @@
 
     <DataTemplate x:Key="fileInfoItemMultipleTemplate">
         <Grid
-            Height="72"
+            Height="45"
             HorizontalAlignment="Stretch"
             Background="Transparent"
             IsEnabled="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
@@ -1618,7 +1622,7 @@
                                         Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}">
                                         <ItemsControl
                                             x:Name="pathPartsItemsControl"
-                                            Margin="26,0,0,0"
+                                            Margin="68,0,0,0"
                                             VerticalAlignment="Center"
                                             ItemTemplate="{StaticResource pathPartItemTemplate}">
                                             <ItemsControl.ItemsPanel>
@@ -1672,11 +1676,13 @@
                                             Margin="0,0,8,0"
                                             Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                             Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
+                                            IsCancel="True"
                                             Style="{DynamicResource MaterialDesignFlatButton}" />
                                         <Button
                                             Margin="0,0,8,0"
                                             Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileCommand}"
                                             Content="{Binding Source={x:Static localization:Strings.Open}, Converter={StaticResource upperCaseConverter}}"
+                                            IsDefault="True"
                                             IsEnabled="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                             Style="{DynamicResource MaterialDesignFlatButton}" />
                                     </StackPanel>
@@ -1750,11 +1756,11 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <DockPanel
-                                    Height="64"
-                                    Background="{DynamicResource PrimaryHueMidBrush}"
-                                    TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <StackPanel
+                                        Margin="0,10,0,0"
+                                        DockPanel.Dock="Right"
+                                        Orientation="Horizontal">
                                         <Button
                                             Margin="0,0,8,0"
                                             Command="{x:Static internalCommands:FileSystemControlCommands.SwitchPathPartsAsButtonsCommand}"
@@ -1782,9 +1788,9 @@
                                         </Button>
                                     </StackPanel>
                                     <TextBlock
-                                        Margin="72,0,16,0"
+                                        Margin="30,10,16,0"
                                         VerticalAlignment="Center"
-                                        FontSize="20"
+                                        FontSize="14"
                                         Text="{x:Static localization:Strings.SaveFile}" />
                                 </DockPanel>
                                 <Grid
@@ -1877,11 +1883,13 @@
                                             Margin="0,0,8,0"
                                             Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                             Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
+                                            IsCancel="True"
                                             Style="{DynamicResource MaterialDesignFlatButton}" />
                                         <Button
                                             Margin="0,0,8,0"
                                             Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileCommand}"
                                             Content="{Binding Source={x:Static localization:Strings.Save}, Converter={StaticResource upperCaseConverter}}"
+                                            IsDefault="True"
                                             IsEnabled="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                             Style="{DynamicResource MaterialDesignFlatButton}" />
                                     </StackPanel>
