@@ -121,6 +121,59 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="BubbleBottomToolTip" TargetType="{x:Type ToolTip}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Placement" Value="Bottom" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid>
+                        <Border
+                            Name="Border"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Margin="0,8,0,0"
+                            Padding="8,4"
+                            Background="{DynamicResource MaterialDesignToolTipBackground}"
+                            BorderThickness="1"
+                            CornerRadius="5">
+
+                            <ContentPresenter Margin="3" />
+                        </Border>
+                        <Path
+                            HorizontalAlignment="Center"
+                            Data="m 10,4 l 10, 12, -20, 0 "
+                            Fill="{DynamicResource MaterialDesignToolTipBackground}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="ToolTip.Opened">
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="VerticalOffset">
+                        <DoubleAnimation
+                            From="30"
+                            To="0"
+                            Duration="0:0:0.2" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Opacity">
+                        <DoubleAnimation
+                            From="0"
+                            To="1"
+                            Duration="0:0:0.3" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style
         x:Key="WindowCloseButtonStyle"
         BasedOn="{StaticResource WindowButtonStyle}"
@@ -344,10 +397,13 @@
                                             <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
                                         </MultiBinding>
                                     </StackPanel.Visibility>
-                                    <Button
-                                        x:Name="minimizeButton"
-                                        Style="{StaticResource WindowMinimizeButtonStyle}"
-                                        ToolTip="{x:Static localization:Strings.Minimize}">
+                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowMinimizeButtonStyle}">
+                                        <Button.ToolTip>
+                                            <ToolTip
+                                                Content="Minimize"
+                                                HorizontalOffset="-12"
+                                                Style="{StaticResource BubbleBottomToolTip}" />
+                                        </Button.ToolTip>
                                         <Button.Visibility>
                                             <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
                                                 <Binding
@@ -367,9 +423,18 @@
                                                 <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
                                             </MultiBinding>
                                         </Button.IsEnabled>
-                                        <md:PackIcon Kind="WindowMinimize" Style="{StaticResource WindowButtonIconStyle}" />
+                                        <md:PackIcon
+                                            Height="18"
+                                            Kind="WindowMinimize"
+                                            Style="{StaticResource WindowButtonIconStyle}" />
                                     </Button>
                                     <Button x:Name="maximizeRestoreButton" Style="{StaticResource WindowMaximizeRestoreButtonStyle}">
+                                        <Button.ToolTip>
+                                            <ToolTip
+                                                Content="Maximize"
+                                                HorizontalOffset="-12"
+                                                Style="{StaticResource BubbleBottomToolTip}" />
+                                        </Button.ToolTip>
                                         <Button.Visibility>
                                             <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
                                                 <Binding
@@ -389,7 +454,7 @@
                                                 <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
                                             </MultiBinding>
                                         </Button.IsEnabled>
-                                        <md:PackIcon>
+                                        <md:PackIcon Height="18">
                                             <md:PackIcon.Style>
                                                 <Style BasedOn="{StaticResource WindowButtonIconStyle}" TargetType="{x:Type md:PackIcon}">
                                                     <Style.Triggers>
@@ -404,10 +469,13 @@
                                             </md:PackIcon.Style>
                                         </md:PackIcon>
                                     </Button>
-                                    <Button
-                                        x:Name="closeButton"
-                                        Style="{StaticResource WindowCloseButtonStyle}"
-                                        ToolTip="{x:Static localization:Strings.Close}">
+                                    <Button x:Name="closeButton" Style="{StaticResource WindowCloseButtonStyle}">
+                                        <Button.ToolTip>
+                                            <ToolTip
+                                                Content="Close"
+                                                HorizontalOffset="-5"
+                                                Style="{StaticResource BubbleBottomToolTip}" />
+                                        </Button.ToolTip>
                                         <Button.Visibility>
                                             <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
                                                 <Binding
@@ -427,7 +495,10 @@
                                                 <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
                                             </MultiBinding>
                                         </Button.IsEnabled>
-                                        <md:PackIcon Kind="WindowClose" Style="{StaticResource WindowButtonIconStyle}" />
+                                        <md:PackIcon
+                                            Height="18"
+                                            Kind="WindowClose"
+                                            Style="{StaticResource WindowButtonIconStyle}" />
                                     </Button>
                                 </StackPanel>
 
